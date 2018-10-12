@@ -251,7 +251,7 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     onlyAllowOrigins: [
-      'https://laboratorios-api.herokuapp.com/'
+      'https://laboratorios-api.herokuapp.com'
     ],
 
 
