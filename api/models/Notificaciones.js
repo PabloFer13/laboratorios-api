@@ -1,0 +1,58 @@
+/**
+ * Reservas.js
+ *
+ * @description :: A model definition.  Represents a database table/collection/etc.
+ * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
+ */
+
+module.exports = {
+
+  attributes: {
+
+    //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
+    //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
+    //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
+
+    id: {
+      type: 'number',
+      unique: true,
+      autoIncrement: true,
+      columnName: 'id_notificacion'
+    },
+    mensaje: {
+      type: 'string'
+    },
+    origen: {
+      model: 'usuarios'
+    },
+    destino: {
+      model: 'usuarios'
+    },
+    status: {
+      model: 'status'
+    },
+    createdAt: {
+      columnName: 'created_at',
+      type: 'string',
+      columnType: 'datetime'
+    },
+    updatedAt: {
+      columnName: 'updated_at',
+      type: 'string',
+      columnType: 'datetime'
+    },
+    
+
+    //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
+    //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
+    //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
+
+
+    //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
+    //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
+    //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
+
+  },
+
+};
+
