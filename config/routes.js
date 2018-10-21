@@ -25,7 +25,8 @@ module.exports.routes = {
   ***************************************************************************/
 
   'get /': 'AppController.index',
-  'post /usuarios': 'UsuariosController.create'
+  'post /usuarios': 'UsuariosController.create',
+  'post /login': 'AppController.login',
 
   /***************************************************************************
   *                                                                          *
