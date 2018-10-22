@@ -43,7 +43,7 @@ module.exports = {
         throw err;
       }
       const password = sails.helpers.encryptPassword(passString);
-      const newUser = await Usuarios.create({
+      const user = await Usuarios.create({
         nombre,
         apellido,
         tipo,
@@ -53,8 +53,13 @@ module.exports = {
         createdAt: moment().format(),
         updatedAt: moment().format()
       }).fetch();
-      sails.log(newUser);
-      res.created({ user: newUser });
+      const token = sails.helpers.generateToken.with({
+        id: user.id,
+        email: user.email,
+        login: moment().format(),
+        key: sails.config.session.secret
+      });
+      res.created({ user, token });
     } catch (err) {
       res.handle(err);
     }

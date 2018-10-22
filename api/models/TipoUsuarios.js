@@ -26,7 +26,7 @@ module.exports = {
       type: 'string'
     },
     permisos: {
-      type: 'string'
+      type: 'number'
     },
     creator: {
       model: 'usuarios'
