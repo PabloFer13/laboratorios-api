@@ -6,7 +6,48 @@
  */
 
 module.exports = {
-  
+  async create(req, res){
+    try {
+      const { nombre, nombreCorto, encargado } = req.allParams();
+
+      let errorString = 'Missing fields:';
+      let reqErr = false;
+      
+      if(!nombre || nombre === ''){
+        errorString = `${errorString} nombre`;
+        reqErr = true;
+      }
+
+      if(!nombreCorto || nombreCorto === ''){
+        errorString = `${errorString} nombreCorto`;
+        reqErr = true;
+      }
+      
+      if(reqErr){
+        const err = {
+          status: 400,
+          err: {
+            message: errorString,
+            error: 'Bad Request'
+          }
+        };
+        throw err;
+      }
+
+      const categoria = Laboratorios.create({
+        nombre,
+        nombreCorto,
+        encargado: encargado || 0,
+        createdAt: moment().format(),
+        updatedAt: moment().format()
+      })
+
+      res.created({ categoria });
+
+    } catch (err) {
+      res.handle(err);
+    }
+  }
 
 };
 

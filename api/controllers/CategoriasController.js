@@ -1,5 +1,5 @@
 /**
- * MateriasController
+ * CategoriasController
  *
  * @description :: Server-side actions for handling incoming requests.
  * @help        :: See https://sailsjs.com/docs/concepts/actions
@@ -8,8 +8,11 @@
 module.exports = {
   async create(req, res){
     try {
-      const { nombre, clave } = req.allParams();
-    
+      const {
+        nombre,
+        display
+      } = req.allParams();
+
       let errorString = 'Missing fields:';
       let reqErr = false;
       
@@ -18,11 +21,11 @@ module.exports = {
         reqErr = true;
       }
 
-      if(!clave || clave === ''){
-        errorString = `${errorString} clave`;
+      if(!display || display === ''){
+        errorString = `${errorString} display`;
         reqErr = true;
       }
-
+      
       if(reqErr){
         const err = {
           status: 400,
@@ -34,19 +37,18 @@ module.exports = {
         throw err;
       }
 
-      const materia = Materias.create({
+      const categoria = Categorias.create({
         nombre,
-        clave,
+        display,
         createdAt: moment().format(),
         updatedAt: moment().format()
       })
 
-      res.created({ materia });
+      res.created({ categoria });
 
     } catch (err) {
       res.handle(err);
     }
-
   }
 
 };

@@ -6,7 +6,45 @@
  */
 
 module.exports = {
-  
+  async create(req, res) {
+    try {
+      const { nombre, display } = req.allParams();
+      
+      let errorString = 'Missing fields:';
+      let reqErr = false;
+      
+      if(!nombre || nombre == ''){
+        errorString = `${errorString} nombre`;
+        reqErr = true;
+      }
 
+      if(!display || display == ''){
+        errorString = `${errorString} display`;
+        reqErr = true;
+      }
+      
+      if(reqErr){
+        const err = {
+          status: 400,
+          err: {
+            message: errorString,
+            error: 'Bad Request'
+          }
+        };
+        throw err;
+      }
+      
+      const tipoReserva = TipoReservas.create({
+        nombre,
+        display,
+        createdAt: moment().format(),
+        updatedAt: moment().format()
+      }).fetch();
+
+      res.created({ tipoReserva });
+    } catch (err) {
+      res.handle(err)
+    }
+  }
 };
 

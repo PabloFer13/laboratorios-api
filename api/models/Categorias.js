@@ -1,5 +1,5 @@
 /**
- * Status.js
+ * Categorias.js
  *
  * @description :: A model definition.  Represents a database table/collection/etc.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -12,7 +12,6 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
-
     id: {
       type: 'number',
       unique: true,
@@ -28,9 +27,6 @@ module.exports = {
     creator: {
       model: 'usuarios'
     },
-    categoria: {
-      model: 'categorias'
-    },
     createdAt: {
       columnName: 'created_at',
       type: 'string',
@@ -41,20 +37,10 @@ module.exports = {
       type: 'string',
       columnType: 'datetime'
     },
-    usuarios: {
-      collection: 'usuarios'
-    },
-    laboratorios: {
-      collection: 'laboratorios'
-    },
-    notifs: {
-      collection: 'notificaciones'
-    },
-    reservas: {
-      collection: 'reservas'
-    },
-    materias: {
-      collection: 'materias'
+
+    relatedStatus: {
+      collection: 'status',
+      via: 'categoria'
     }
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗

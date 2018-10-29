@@ -12,23 +12,23 @@ module.exports = {
       const { name: nombre, type: tipo, lastName: apellido, email, password: passString } = req.allParams();
       let errorString = 'Missing fields:';
       let reqErr = false;
-      if(!nombre){
+      if(!nombre || nombre === ''){
         errorString = `${errorString} name`;
         reqErr = true;
       }
-      if(!tipo){
+      if(!tipo || tipo === 0){
         errorString = `${errorString} type`;
         reqErr = true;
       }
-      if(!apellido){
+      if(!apellido || apellido === ''){
         errorString = `${errorString} lastName`;
         reqErr = true;
       }
-      if(!email){
+      if(!email || email === ''){
         errorString = `${errorString} email`;
         reqErr = true;
       }
-      if(!passString){
+      if(!passString || passString === ''){
         errorString = `${errorString} password`;
         reqErr = true;
       }
