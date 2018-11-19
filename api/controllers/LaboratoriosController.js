@@ -34,7 +34,7 @@ module.exports = {
         throw err;
       }
 
-      const categoria = Laboratorios.create({
+      const laboratorio = Laboratorios.create({
         nombre,
         nombreCorto,
         encargado: encargado || 0,
@@ -42,7 +42,7 @@ module.exports = {
         updatedAt: moment().format()
       })
 
-      res.created({ categoria });
+      res.created({ laboratorio });
 
     } catch (err) {
       res.handle(err);

@@ -27,10 +27,10 @@ module.exports = {
         reqErr = true;
       }
 
-      if(!categoria || categoria === 0){
-        errorString = `${errorString} categoria`;
-        reqErr = true;
-      }
+      // if(!categoria || categoria === 0){
+      //   errorString = `${errorString} categoria`;
+      //   reqErr = true;
+      // }
       
       if(reqErr){
         const err = {
