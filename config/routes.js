@@ -57,7 +57,7 @@ module.exports.routes = {
   'post /laboratorios': 'LaboratoriosController.create',
   'get /laboratorios': 'LaboratoriosController.find',
   'get /laboratorios/:id': 'LaboratoriosController.get',
-  'put /laboratorios/:id': 'LaboratoriosController.update'
+  'put /laboratorios/:id': 'LaboratoriosController.update',
   'delete /laboratorios/:id': 'LaboratoriosController.delete',
 
   /***************************************************************************
