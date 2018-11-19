@@ -56,6 +56,19 @@ module.exports = {
     } catch (err) {
       res.handle(err);
     }
+  },
+
+  async find(req, res) {
+    try {
+      const { nombre } = req.allParams();
+      const filtro = nombre ? { nombre } : {};
+
+      const status = Status.find(filtro);
+
+      res.success({ status });
+    } catch (err) {
+      res.handle(err);
+    }
   }
 };
 

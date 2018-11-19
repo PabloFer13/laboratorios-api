@@ -63,6 +63,153 @@ module.exports = {
     } catch (err) {
       res.handle(err);
     }
+  },
+  async update(req, res){
+    try {
+      const {
+        id,
+        email,
+        name: nombre,
+        type: tipo,
+        status,
+        apellidoPaterno,
+        apellidoMaterno,
+        password: passString
+      } = req.allParams();
+
+      let params = {
+        email,
+        nombre,
+        tipo,
+        apellido,
+        status,
+        password: ''
+      }
+
+      let par = 7;
+
+      if(!email || email === ''){
+        delete params.email;
+        par = par - 1;
+      }
+      if(!nombre || nombre === ''){
+        delete params.nombre;
+        par = par - 1;
+      }
+      if(!tipo || tipo < 1){
+        delete params.tipo;
+        par = par - 1;
+      }
+      if(!apellido || apellido === ''){
+        delete params.apellido;
+        par = par - 1;
+      }
+      if(!status || status < 1){
+        delete params.status;
+        par = par - 1;
+      }
+      if(!passString || passString === ''){
+        delete params.password;
+        par = par - 1;
+      }else{
+        params.password = sails.helpers.encryptPassword(passString)
+      }
+
+      if(par < 1){
+        const error = {
+          code: 400,
+          message: 'Bad Request, nothing to update'
+        }
+        throw error;
+      }
+
+      await Usuarios.update({ id }).set({ ...params });
+      const user = await Usuarios.find({ id })
+        .populate('tipo')
+        .populate('status');
+      res.success({ user });
+
+    } catch (err) {
+      res.handle(err);
+    }
+  },
+  async delete(req, res){
+    try {
+      const { id } = req.allParams();
+      
+      await Usuarios.update({ id }).set({ status: 2 });
+
+      res.ok();
+
+    } catch (err) {
+      res.handle(err);
+    }
+  },
+  async find(req, res){
+    try {
+      const { id } = req.allParams();
+      const user = await Usuarios.findOne({ id })
+        .populate('status')
+        .populate('tipo');
+      res.success(user);
+    } catch (err) {
+      res.handle(err);
+    }
+  },
+  async get(req, res) {
+    try {
+      const {
+        nombre,
+        apellido,
+        status,
+        email,
+        tipo,
+        carrera,
+        academia
+      } = req.allParams();
+      
+      let params = {};
+
+      if(nombre){
+        params.nombre = {
+          like: `%${nombre}%`
+        };
+      }
+
+      if(apellido){
+        params.apellido = {
+          like: `%${apellido}%`
+        };
+      }
+
+      if(status){
+        params.status = status;
+      }
+
+      if(email){
+        params.email = {
+          like: `%${email}%`
+        };
+      }
+
+      const ors = Object.keys(params).map(item => {
+        return { [item]: params[item] }
+      })
+
+      sails.log(ors)
+
+      const rawUsers = await Usuarios.find(Object.keys(params).length === 0 ? {} : {
+        or: ors });
+      const users = rawUsers.map(item => {
+        delete item.password;
+        return { ...item };
+      })
+
+      res.success(users);
+
+    } catch (err) {
+      res.handle(err)
+    }
   }
 };
 

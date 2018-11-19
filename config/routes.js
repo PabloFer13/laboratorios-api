@@ -29,6 +29,37 @@ module.exports.routes = {
   'post /login': 'AppController.login',
   'post /user-types': 'TipoUsuariosController.create',
 
+  'put /usuarios': 'UsuariosController.update',
+  'delete /usuarios/:id': 'UsuariosController.delete',
+  'get /usuarios/:id': 'UsuariosController/find',
+  'get /usuarios': 'UsuariosController.get',
+  
+  'get /user-types': 'TipoUsuariosController.find',
+
+  'get /reservation-types': 'TipoReservasController.all',
+  'post /reservation-types': 'TipoReservasController.create',
+
+  'post /status': 'StatusController.create',
+  'get /status': 'StatusController.find',
+
+  'post /reservations': 'ReservasController.create',
+  'put /reservations/:id': 'ReservasController.update',
+  'delete /reservations/:id': 'ReservasController.delete',
+  'get /reservations': 'ReservasController.find',
+  'get /reservations/:id': 'ReservasController.get',
+
+  'post /materias': 'MateriasController.create',
+  'get /materias': 'MateriasController.find',
+  'get /materias/:id': 'MateriasController.get',
+  'put /materias/:id': 'MateriasController.update',
+  'delete /materias/:id': 'MateriasController.delete',
+
+  'post /laboratorios': 'LaboratoriosController.create',
+  'get /laboratorios': 'LaboratoriosController.find',
+  'get /laboratorios/:id': 'LaboratoriosController.get',
+  'put /laboratorios/:id': 'LaboratoriosController.update'
+  'delete /laboratorios/:id': 'LaboratoriosController.delete',
+
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *

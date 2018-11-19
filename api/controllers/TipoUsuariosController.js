@@ -54,7 +54,16 @@ module.exports = {
     } catch (err) {
       res.handle(err);
     }
-  }
+  },
 
+  async find(req, res){
+    try {
+      const tipoUsuarios = await TipoUsuarios.find({});
+
+      res.success({ tipoUsuarios });
+    } catch (err) {
+      res.handle(err);
+    }
+  }
 };
 

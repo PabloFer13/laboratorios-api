@@ -34,7 +34,7 @@ module.exports = {
         throw err;
       }
       
-      const tipoReserva = TipoReservas.create({
+      const tipoReserva = await TipoReservas.create({
         nombre,
         display,
         createdAt: moment().format(),
@@ -44,6 +44,16 @@ module.exports = {
       res.created({ tipoReserva });
     } catch (err) {
       res.handle(err)
+    }
+  },
+
+  async all(req, res){
+    try {
+      const tiposreservas = await TiposReservas.find();
+
+      res.success({ tiposReservas });
+    } catch (err) {
+      res.handle(err);
     }
   }
 };

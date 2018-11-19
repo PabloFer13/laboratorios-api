@@ -44,6 +44,10 @@ module.exports = {
     },
     status: {
       model: 'status'
+    },
+    reservas: {
+      collection: 'reservas',
+      via: 'laboratorio'
     }
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗

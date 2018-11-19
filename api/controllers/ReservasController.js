@@ -93,9 +93,79 @@ module.exports = {
       status: tipo === 1 ? 4 : 3,
     });
 
+    const lab = Laboratorios.findOne({ id: laboratorio });
+
+    Laboratorios.addToCollection(laboratorio, 'reservas').members([reserva.id]);
+
     res.created({ reserva });
 
+  },
+
+  async update(req, res){
+    try{
+      const { status, id, comments = '' } = req.allParams();
+
+      const reserva = await Reservas.updateOne({ id }).set({
+        status,
+        comments,
+      });
+
+      res.success({ reserva });
+    }catch(err){
+      res.handle(err);
+    }
+  },
+
+  async delete(req, res){
+    try{
+      const { id } = req.allParams();
+
+      const reserva = await Reservas.updateOne({ id }).set({ status: 2 });
+
+      res.success({ reserva });
+    }catch(err){
+      res.handle(err);
+    }
+  },
+
+  async find(req, res){
+    try {
+      const { laboratorio, status } = req.allParams();
+
+      const filters = {};
+
+      if(laboratorio) filters.laboratorio = laboratorio;
+      if(status) filters.status = status;
+
+      const reservas = Reservas.find({ ...filters });
+
+      res.success({ reservas });
+    } catch (err) {
+      res.handle(err);
+    }
+  },
+
+  async get(req, res){
+    try {
+      const { id } = req.allParams();
+
+      const reserva = Reservas.findOne({ id });
+      res.success({ reserva });
+    } catch (err) {
+      res.handle(err);
+    }
+  },
+
+  async delete(req, res){
+    try {
+      const { id } = req.allParams();
+
+      const reserva = await Reservas.updateOne({ id }).set({ status: 2 });
+
+      res.success({ reserva });
+    } catch (err) {
+      res.handle(err);
+    }
   }
 
 };
-
