@@ -31,16 +31,6 @@ module.exports = {
     status: {
       model: 'status'
     },
-    createdAt: {
-      columnName: 'created_at',
-      type: 'string',
-      columnType: 'datetime'
-    },
-    updatedAt: {
-      columnName: 'updated_at',
-      type: 'string',
-      columnType: 'datetime'
-    },
     
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗

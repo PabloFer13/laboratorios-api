@@ -43,16 +43,6 @@ module.exports = {
     status: {
       model: 'status'
     },
-    createdAt: {
-      columnName: 'created_at',
-      type: 'ref',
-      columnType: 'datetime'
-    },
-    updatedAt: {
-      columnName: 'updated_at',
-      type: 'ref',
-      columnType: 'datetime'
-    },
     laboratorios: {
       collection: 'laboratorios'
     },

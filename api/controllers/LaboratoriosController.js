@@ -43,8 +43,6 @@ module.exports = {
         nombre,
         nombreCorto,
         encargado: encargado,
-        createdAt: moment().format(),
-        updatedAt: moment().format()
       })
 
       res.created({ laboratorio });

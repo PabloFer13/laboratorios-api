@@ -50,8 +50,6 @@ module.exports = {
         email,
         password,
         status: 1,
-        createdAt: moment().format(),
-        updatedAt: moment().format()
       }).fetch();
       const token = sails.helpers.generateToken.with({
         id: user.id,

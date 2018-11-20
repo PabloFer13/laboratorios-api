@@ -1,3 +1,4 @@
+const moment = require('moment');
 /**
  * StatusController
  *
@@ -43,17 +44,18 @@ module.exports = {
         throw err;
       }
 
-      const status = Status.create({
+      const status = await Status.create({
         nombre,
         display,
         categoria,
-        createdAt: moment().format(),
-        updatedAt: moment().format()
-      })
+        // createdAt: moment().format(),
+        // updatedAt: moment().format()
+      }).fetch();
 
       res.created({ status });
 
     } catch (err) {
+      sails.log(err);
       res.handle(err);
     }
   },

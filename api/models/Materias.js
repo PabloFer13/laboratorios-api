@@ -25,16 +25,6 @@ module.exports = {
     clave: {
       type: 'string'
     },
-    createdAt: {
-      columnName: 'created_at',
-      type: 'string',
-      columnType: 'datetime'
-    },
-    updatedAt: {
-      columnName: 'updated_at',
-      type: 'string',
-      columnType: 'datetime'
-    },
     creator: {
       model: 'usuarios'
     },

@@ -31,16 +31,6 @@ module.exports = {
     creator: {
       model: 'usuarios'
     },
-    createdAt: {
-      columnName: 'created_at',
-      type: 'ref',
-      columnType: 'datetime'
-    },
-    updatedAt: {
-      columnName: 'updated_at',
-      type: 'ref',
-      columnType: 'datetime'
-    },
     usuarios: {
       collection: 'usuarios'
     }

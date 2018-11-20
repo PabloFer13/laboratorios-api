@@ -37,8 +37,6 @@ module.exports = {
       const tipoReserva = await TipoReservas.create({
         nombre,
         display,
-        createdAt: moment().format(),
-        updatedAt: moment().format()
       }).fetch();
 
       res.created({ tipoReserva });

@@ -40,8 +40,6 @@ module.exports = {
       const categoria = Categorias.create({
         nombre,
         display,
-        createdAt: moment().format(),
-        updatedAt: moment().format()
       })
 
       res.created({ categoria });

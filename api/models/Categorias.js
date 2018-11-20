@@ -27,17 +27,6 @@ module.exports = {
     creator: {
       model: 'usuarios'
     },
-    createdAt: {
-      columnName: 'created_at',
-      type: 'string',
-      columnType: 'datetime'
-    },
-    updatedAt: {
-      columnName: 'updated_at',
-      type: 'string',
-      columnType: 'datetime'
-    },
-
     relatedStatus: {
       collection: 'status',
       via: 'categoria'

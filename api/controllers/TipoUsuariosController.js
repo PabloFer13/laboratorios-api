@@ -44,8 +44,6 @@ module.exports = {
         nombre,
         display,
         permisos,
-        createdAt: moment().format(),
-        updatedAt: moment().format()
       }).fetch();
       sails.log('acaba de crear', tipo)
       sails.log(tipo);

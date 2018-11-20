@@ -37,8 +37,6 @@ module.exports = {
       const materia = Materias.create({
         nombre,
         clave,
-        createdAt: moment().format(),
-        updatedAt: moment().format()
       })
 
       res.created({ materia });

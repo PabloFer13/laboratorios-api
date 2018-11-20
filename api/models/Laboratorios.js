@@ -26,16 +26,6 @@ module.exports = {
       type: 'string',
       columnName: 'nombre_corto'
     },
-    createdAt: {
-      columnName: 'created_at',
-      type: 'string',
-      columnType: 'datetime'
-    },
-    updatedAt: {
-      columnName: 'updated_at',
-      type: 'string',
-      columnType: 'datetime'
-    },
     encargado: {
       model: 'usuarios'
     },
