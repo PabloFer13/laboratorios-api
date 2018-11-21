@@ -34,10 +34,10 @@ module.exports = {
         throw err;
       }
 
-      const materia = Materias.create({
+      const materia = await Materias.create({
         nombre,
         clave,
-      })
+      }).fetch();
 
       res.created({ materia });
 
@@ -49,23 +49,23 @@ module.exports = {
 
   async find(req, res){
     try {
-      const { searchString } = req.allParams();
+      const { searchString = '' } = req.allParams();
       
-      if(!searchString && searchString !== ''){
-        const err = {
-          status: 400,
-          err: {
-            message: errorString,
-            error: 'Bad Request'
-          }
-        };
-        throw err;
-      }
+      // if(!searchString && searchString !== ''){
+      //   const err = {
+      //     status: 400,
+      //     err: {
+      //       message: errorString,
+      //       error: 'Bad Request'
+      //     }
+      //   };
+      //   throw err;
+      // }
 
       const materias = await Materias.find({
         or: [
-          { nombre: searchString },
-          { clave: searchString },
+          { nombre: { like: `%${searchString}%` } },
+          { clave: { like: `%${searchString}%` } },
         ],
       });
 

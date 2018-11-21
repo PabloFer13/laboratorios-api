@@ -39,11 +39,11 @@ module.exports = {
         throw err;
       }
 
-      const laboratorio = Laboratorios.create({
+      const laboratorio = await Laboratorios.create({
         nombre,
         nombreCorto,
         encargado: encargado,
-      })
+      }).fetch();
 
       res.created({ laboratorio });
 
@@ -54,23 +54,23 @@ module.exports = {
 
   async find(req, res){
     try{
-      const { searchString } = req.allParams();
+      const { searchString = '' } = req.allParams();
       
-      if(!searchString && searchString !== ''){
-        const err = {
-          status: 400,
-          err: {
-            message: errorString,
-            error: 'Bad Request'
-          }
-        };
-        throw err;
-      }
+      // if(!searchString && searchString !== ''){
+      //   const err = {
+      //     status: 400,
+      //     err: {
+      //       message: errorString,
+      //       error: 'Bad Request'
+      //     }
+      //   };
+      //   throw err;
+      // }
 
       const laboratorios = await Laboratorios.find({
         or: [
-          { nombre: searchString },
-          { nombreCorto: searchString },
+          { nombre: { like: `%${searchString}%` } },
+          { nombreCorto: { like: `%${searchString}%` } },
         ],
       });
 

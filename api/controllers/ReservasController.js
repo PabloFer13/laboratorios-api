@@ -19,7 +19,7 @@ module.exports = {
       materia,
       solicitante,
       maestro,
-    } = req.AllParams();
+    } = req.allParams();
     
     const fechaInicio = moment(rawfechaInicio, 'DD/MM/YYYY');
     const fechaFinal = moment(rawfechaFinal, 'DD/MM/YYYY');
@@ -27,10 +27,10 @@ module.exports = {
     const horaFinal = moment(rawhoraFinal,'HH:mm');
 
     const validDateType = sails.helpers.validateType.with({
-      fechaInicio,
-      fechaFinal,
-      horaInicio,
-      horaFinal
+      fechaInicio: fechaInicio.format('DD/MM/YYYY'),
+      fechaFinal: fechaFinal.format('DD/MM/YYYY'),
+      horaInicio: horaInicio.format('HH:mm'),
+      horaFinal: horaFinal.format('HH:mm'),
     });
 
     if(!validDateType){
@@ -48,10 +48,10 @@ module.exports = {
         status: 1,
         dia,
         fechaInicio: {
-          '>=': fechaInicio
+          '>=': fechaInicio.format('DD/MM/YYYY')
         },
         fechaFinal: {
-          '<=': fechaFinal
+          '<=': fechaFinal.format('DD/MM/YYYY')
         },
       }
     });
@@ -81,8 +81,8 @@ module.exports = {
     
     const reserva = await Reservas.create({
       tipo,
-      fechaInicio: fechaInicio.format('DD/MM/YYYY'),
-      fechaFinal: fechaFinal.format('DD/MM/YYYY'),
+      fechaInicio: fechaInicio.format('YYYY/MM/DD'),
+      fechaFinal: fechaFinal.format('YYYY/MM/DD'),
       horaInicio: horaInicio.format('HH:mm'),
       horaFinal: horaFinal.format('HH:mm'),
       dia,
@@ -91,11 +91,11 @@ module.exports = {
       solicitante,
       maestro,
       status: tipo === 1 ? 4 : 3,
-    });
+    }).fetch();
 
-    const lab = Laboratorios.findOne({ id: laboratorio });
+    const lab = await Laboratorios.findOne({ id: laboratorio });
 
-    Laboratorios.addToCollection(laboratorio, 'reservas').members([reserva.id]);
+    await Laboratorios.addToCollection(laboratorio, 'reservas').members([reserva.id]);
 
     res.created({ reserva });
 
@@ -137,7 +137,7 @@ module.exports = {
       if(laboratorio) filters.laboratorio = laboratorio;
       if(status) filters.status = status;
 
-      const reservas = Reservas.find({ ...filters });
+      const reservas = await Reservas.find({ ...filters });
 
       res.success({ reservas });
     } catch (err) {

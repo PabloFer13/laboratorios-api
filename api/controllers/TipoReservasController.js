@@ -47,10 +47,11 @@ module.exports = {
 
   async all(req, res){
     try {
-      const tiposreservas = await TiposReservas.find();
+      const tiposReservas = await TipoReservas.find({});
 
       res.success({ tiposReservas });
     } catch (err) {
+      sails.log(err);
       res.handle(err);
     }
   }

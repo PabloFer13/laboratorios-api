@@ -24,12 +24,12 @@ module.exports = {
     },
     fechaInicio: {
       type: 'string',
-      columnType: 'date',
+      columnType: 'DATE',
       columnName: 'fecha_inicio'
     },
     fechaFinal: {
       type: 'string',
-      columnType: 'date',
+      columnType: 'DATE',
       columnName: 'fecha_final'
     },
     horaInicio: {

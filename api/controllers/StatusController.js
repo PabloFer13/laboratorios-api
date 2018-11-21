@@ -65,7 +65,7 @@ module.exports = {
       const { nombre } = req.allParams();
       const filtro = nombre ? { nombre } : {};
 
-      const status = Status.find(filtro);
+      const status = await Status.find(filtro);
 
       res.success({ status });
     } catch (err) {

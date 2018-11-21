@@ -29,7 +29,7 @@ module.exports.routes = {
   'post /login': 'AppController.login',
   'post /user-types': 'TipoUsuariosController.create',
 
-  'put /usuarios': 'UsuariosController.update',
+  'put /usuarios/:id': 'UsuariosController.update',
   'delete /usuarios/:id': 'UsuariosController.delete',
   'get /usuarios/:id': 'UsuariosController/find',
   'get /usuarios': 'UsuariosController.get',
